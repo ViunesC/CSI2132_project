@@ -1,0 +1,432 @@
+use hotelManagement;
+
+CREATE TABLE hotelChain(
+	chain_ID INT NOT NULL,
+    chain_name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    office_address VARCHAR(50) NOT NULL,
+    phone_num VARCHAR(50) NOT NULL,
+    number_of_hotels INT NOT NULL,
+    PRIMARY KEY(chain_ID)
+);
+
+CREATE TABLE hotel(
+	hotel_ID INT NOT NULL,
+    hotel_address VARCHAR(255) NOT NULL,
+    category VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    chain_ID INT NOT NULL,
+    hotel_name VARCHAR(50) NOT NULL,
+	area VARCHAR(255) NOT NULL,
+    PRIMARY KEY(hotel_ID),
+    FOREIGN KEY(chain_ID) REFERENCES hotelChain(chain_ID)
+);
+
+CREATE TABLE employee(
+	employee_ID INT NOT NULL,
+    employee_name VARCHAR(50) NOT NULL,
+    SSN VARCHAR(50) NOT NULL,
+    employee_email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    role_name VARCHAR(50) NOT NULL,
+    hotel_ID INT,
+    position VARCHAR(50) NOT NULL,
+    PRIMARY KEY(employee_ID),
+    FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID)
+);
+
+CREATE TABLE manager(
+	employee_ID INT NOT NULL,
+    manager_ID INT NOT NULL,
+    hotel_ID INT NOT NULL,
+    PRIMARY KEY(manager_ID),
+    FOREIGN KEY(employee_ID) REFERENCES employee(employee_ID),
+    FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID)
+);
+
+CREATE TABLE room(
+	room_ID VARCHAR(10) NOT NULL,
+    room_type VARCHAR(50) NOT NULL,
+    capacity INT NOT NULL,
+    amenities VARCHAR(255),
+    price INT NOT NULL,
+    view_type VARCHAR(50),
+    can_be_extended VARCHAR(10) NOT NULL,
+    problems VARCHAR(255),
+    hotel_ID INT NOT NULL,
+    PRIMARY KEY(room_ID),
+    FOREIGN KEY(hotel_ID) REFERENCES hotel(hotel_ID)
+);
+
+CREATE TABLE customer(
+	customer_ID INT NOT NULL,
+    customer_name VARCHAR(50) NOT NULL,
+    customer_address VARCHAR(255),
+    customer_phone VARCHAR(50) NOT NULL,
+    customer_email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    SSN VARCHAR(50) NOT NULL,
+    registration_date VARCHAR(50) NOT NULL,
+    PRIMARY KEY(customer_ID)
+);
+
+CREATE TABLE booking(
+	booking_ID VARCHAR(10) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    room_ID VARCHAR(10) NOT NULL,
+    customer_ID INT NOT NULL,
+    PRIMARY KEY(booking_ID),
+    FOREIGN KEY(room_ID) REFERENCES room(room_ID),
+    FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID)
+);
+
+CREATE TABLE renting(
+	renting_ID VARCHAR(10) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    room_ID VARCHAR(10) NOT NULL,
+    customer_ID INT NOT NULL,
+    employee_ID INT NOT NULL,
+    PRIMARY KEY(renting_ID),
+    FOREIGN KEY(customer_ID) REFERENCES customer(customer_ID),
+    FOREIGN KEY(room_ID) REFERENCES room(room_ID),
+    FOREIGN KEY(employee_ID) REFERENCES employee(employee_ID)
+);
+
+CREATE TABLE admin(
+    admin_ID INT NOT NULL,
+    register_date DATE NOT NULL,
+    admin_email VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    PRIMARY KEY(admin_ID)
+);
+
+INSERT INTO admin VALUES (1,'2021-01-24', 'tcMacLee@admin.ehotel', 'qwerty');
+INSERT INTO admin VALUES (2,'2021-11-05', 'kYvung@admin.ehotel', 'asdfgh');
+
+INSERT INTO hotelChain values (10,"BuckChains","buckC@somemail.com","86 the great street, Ottawa","5504369570",10);
+INSERT INTO hotelChain values (8,"UniversalChains","unich@somemail.com","94 King ave, Toronto","4604861851",9);
+INSERT INTO hotelChain values (11,"Tenyuan","tyuan@somemail.com","50 Shanghai street, Shanghai","1863524965",8);
+INSERT INTO hotelChain values (6,"TheBestChain","bestC@somemail.com","70 youshi street, Ottawa","6575149763",10);
+INSERT INTO hotelChain values (95,"ValueChains","vc@somemail.com","75 tokyo street, Tokyo","5486325413",8);
+
+INSERT INTO hotel values (5,"70 the great street","5-star","VisaHotel@somemail.com",10,"Visa Hotel","Ottawa");
+INSERT INTO hotel values (3,"75 Brown ave","5-star","HomeStay@somemail.com",10,"Homestay Hotel","Ottawa");
+INSERT INTO hotel values (2,"11 James street","2-star","Vacation@somemail.com",10,"Vacation Inn","Toronto");
+INSERT INTO hotel values (1,"66 Facai street","5-star","JustHome@somemail.com",10,"Just Home Hotel","China");
+INSERT INTO hotel values (4,"12 Rookie street","4-star","Eliz@somemail.com",10,"Elizabeth Hotel","UK");
+INSERT INTO hotel values (6,"54 Goose street","6-star","panther@somemail.com",10,"Black Panter Hotel","Africa");
+INSERT INTO hotel values (7,"168 jesus street","5-star","Yes@somemail.com",10,"Yes Us Hotel","Ottawa");
+INSERT INTO hotel values (8,"665 Young street","2-star","Sleep@somemail.com",10,"Sleep Well Inn","Toronto");
+INSERT INTO hotel values (9,"352 Old street","5-star","Sheep@somemail.com",10,"Soft Sheep","Kinston");
+INSERT INTO hotel values (10,"854 Ground street","4-star","Like@somemail.com",10,"Like us Hotel","Vancouver");
+
+INSERT INTO hotel values (101,"100 the great street","5-star","Super@somemail.com",8,"Superboy Hotel","Ottawa");
+INSERT INTO hotel values (102,"30 Yummy street","4-star","Power@somemail.com",8,"Power up Hotel","USA");
+INSERT INTO hotel values (103,"98 Flower street","5-star","PZ@somemail.com",8,"Pleased Zone Hotel","Toronto");
+INSERT INTO hotel values (104,"45 Fragrence ave","6-star","Buzz@somemail.com",8,"No Buzz Hotel","China");
+INSERT INTO hotel values (105,"964 Sherlock street","4-star","FindMe@somemail.com",8,"Find Me Hotel","UK");
+INSERT INTO hotel values (106,"77 Cat street","2-star","well@somemail.com",8,"Quiet Well Inn","USA");
+INSERT INTO hotel values (107,"200 Dog street","3-star","food@somemail.com",8,"Food Mood Hotel","Africa");
+INSERT INTO hotel values (108,"71 Elephent street","3-star","YIU@somemail.com",8,"Yes It's us Hotel","Toronto");
+INSERT INTO hotel values (109,"87 Bark street","5-star","youth@somemail.com",8,"Youth Hotel","Tokyo");
+
+INSERT INTO hotel values (1101,"340 Glen street","3-star","mem@somemail.com",11,"Southern Memorial Hotel","Kyoto");
+INSERT INTO hotel values (1102,"191 Orchard street","5-star","oak@somemail.com",11,"Ancient Oak Hotel","Toronto");
+INSERT INTO hotel values (1103,"447 Windfall street","3-star","silver@somemail.com",11,"Silver Refuge Hotel","Africa");
+INSERT INTO hotel values (1104,"181 Baker street","6-star","sun@somemail.com",11,"Sunset Woodland Hotel","China");
+INSERT INTO hotel values (1105,"27 Richardson street","6-star","star@somemail.com",11,"Modest Star Hotel","Ottawa");
+INSERT INTO hotel values (1106,"86 Creekside street","5-star","winter@somemail.com",11,"Winter Rainbow Hotel","Ottawa");
+INSERT INTO hotel values (1107,"412 Lake street","5-star","blzz@somemail.com",11,"Blizzard Hotel","South Korea");
+INSERT INTO hotel values (1108,"204 Lantern street","5-star","wonder@somemail.com",11,"Wonderland Hotel","South Korea");
+
+INSERT INTO hotel values (3540,"17 Five Points street","4-star","fresh@somemail.com",6,"Refresh Hotel","Kinston");
+INSERT INTO hotel values (3541,"397 Post Farm Road","4-star","PH@somemail.com",6,"Prince's Heritage Hotel","Vancouber");
+INSERT INTO hotel values (3542,"11 Cunningham street","4-star","monarch@somemail.com",6,"Spring Monarch Resort","Russia");
+INSERT INTO hotel values (3543,"522 Grim street","6-star","rgrove@somemail.com",6,"Royal Grove Hotel","Kinston");
+INSERT INTO hotel values (3544,"511 Franklin street","6-star","jade@somemail.com",6,"Jade Shores Hotel","Kinston");
+INSERT INTO hotel values (3545,"424 North street","3-star","vale@somemail.com",6,"Atlantis Vale Hotel","UK");
+INSERT INTO hotel values (3546,"120 Worthington street","3-star","imp@somemail.com",6,"Imperial Hotel","USA");
+INSERT INTO hotel values (3547,"27 Hartland street","5-star","uto@somemail.com",6,"Utopia Hotel","Russia");
+INSERT INTO hotel values (3548,"573 Breezewood street","5-star","cloud@somemail.com",6,"Cloud Resort","Thailand");
+INSERT INTO hotel values (3549,"580 Crim street","5-star","repose@somemail.com",6,"Repose Hotel","Thailand");
+
+INSERT INTO hotel values (4056,"423 Gateway street","5-star","rad@somemail.com",95,"Radiance Resort","Ottawa");
+INSERT INTO hotel values (4057,"310 Maxwell street","5-star","vert@somemail.com",95,"Vertex Resort","Kinston");
+INSERT INTO hotel values (4058,"606 Callison street","5-star","sheild@somemail.com",95,"Southern Shield Hotel","South Africa");
+INSERT INTO hotel values (4059,"200 Cityview street","5-star","rose@somemail.com",95,"Summer Rose Hotel","Brazil");
+INSERT INTO hotel values (4060,"463 Strother street","5-star","cosmos@somemail.com",95,"Cosmos Resort","Iceland");
+INSERT INTO hotel values (4061,"539 Mayo street","5-star","grand@somemail.com",95,"Grand Hotel","Brazil");
+INSERT INTO hotel values (4062,"140 Marion street","5-star","curi@somemail.com",95,"Curiosity Resort","Ottawa");
+INSERT INTO hotel values (4063,"215 Byers street","5-star","haven@somemail.com",95,"Brass Haven Resort","South Africa");
+
+INSERT INTO room values("5203","King",8,"Super TV",1200,"sea view","no",null,5);
+INSERT INTO room values("5204","Queen",10,"Super TV",1400,"sea view","no",null,5);
+INSERT INTO room values("5305","Super",14,"Party",1900,"sea view","no",null,5);
+INSERT INTO room values("5103","Single",1,null,200,null,"yes","toilet",5);
+INSERT INTO room values("5106","Tour",2,"fridge",300,"mountain view","yes","washroom",5);
+
+INSERT INTO room values("1203","King",8,"Super TV",1200,"sea view","no",null,1);
+INSERT INTO room values("1204","Queen",10,"Super TV",1400,"sea view","no",null,1);
+INSERT INTO room values("1305","Super",14,"Party",1900,"sea view","no",null,1);
+INSERT INTO room values("1103","Single",1,null,200,null,"yes","toilet",1);
+INSERT INTO room values("1106","Tour",2,"fridge",300,"mountain view","yes","washroom",1);
+
+INSERT INTO room values("2203","King",6,"TV",800,"sea view","no",null,2);
+INSERT INTO room values("2204","Queen",8,"TV",1000,"sea view","no",null,2);
+INSERT INTO room values("2305","Super",10,"Party",1100,"sea view","no",null,2);
+INSERT INTO room values("2103","Single",1,null,90,null,"yes","light",2);
+INSERT INTO room values("2106","Tour",2,"fridge",120,"mountain view","yes","door",2);
+
+INSERT INTO room values("3203","King",8,"Super TV",1200,"sea view","no",null,3);
+INSERT INTO room values("3204","Queen",10,"Super TV",1400,"sea view","no",null,3);
+INSERT INTO room values("3305","Super",14,"Party",1900,"sea view","no",null,3);
+INSERT INTO room values("3103","Single",1,null,200,null,"yes","toilet",3);
+INSERT INTO room values("3106","Tour",2,"fridge",300,"mountain view","yes","washroom",3);
+
+INSERT INTO room values("4203","King",8,"Super TV",1200,"sea view","no",null,4);
+INSERT INTO room values("4204","Queen",10,"Super TV",1400,"sea view","no",null,4);
+INSERT INTO room values("4305","Super",14,"Party",1900,"sea view","no",null,4);
+INSERT INTO room values("4103","Single",1,null,200,null,"yes","toilet",4);
+INSERT INTO room values("4106","Tour",2,"fridge",300,"mountain view","yes","washroom",4);
+
+INSERT INTO room values("6203","King",8,"Super TV",1200,"sea view","no",null,6);
+INSERT INTO room values("6204","Queen",10,"Super TV",1400,"sea view","no",null,6);
+INSERT INTO room values("6305","Super",14,"Party",1900,"sea view","no",null,6);
+INSERT INTO room values("6103","Single",1,null,200,null,"yes","toilet",6);
+INSERT INTO room values("6106","Tour",2,"fridge",300,"mountain view","yes","washroom",6);
+
+INSERT INTO room values("7203","King",8,"Super TV",1200,"sea view","no",null,7);
+INSERT INTO room values("7204","Queen",10,"Super TV",1400,"sea view","no",null,7);
+INSERT INTO room values("7305","Super",14,"Party",1900,"sea view","no",null,7);
+INSERT INTO room values("7103","Single",1,null,200,null,"yes","toilet",7);
+INSERT INTO room values("7106","Tour",2,"fridge",300,"mountain view","yes","washroom",7);
+
+INSERT INTO room values("8203","King",8,"Super TV",1200,"sea view","no",null,8);
+INSERT INTO room values("8204","Queen",10,"Super TV",1400,"sea view","no",null,8);
+INSERT INTO room values("8305","Super",14,"Party",1900,"sea view","no",null,8);
+INSERT INTO room values("8103","Single",1,null,200,null,"yes","toilet",8);
+INSERT INTO room values("8106","Tour",2,"fridge",300,"mountain view","yes","washroom",8);
+
+INSERT INTO room values("9203","King",8,"Super TV",1200,"sea view","no",null,9);
+INSERT INTO room values("9204","Queen",10,"Super TV",1400,"sea view","no",null,9);
+INSERT INTO room values("9305","Super",14,"Party",800,"sea view","no",null,9);
+INSERT INTO room values("9103","Single",1,null,200,null,"yes","toilet",9);
+INSERT INTO room values("9106","Tour",2,"fridge",300,"mountain view","yes","washroom",9);
+
+INSERT INTO room values("10203","King",8,"Super TV",1200,"sea view","no",null,10);
+INSERT INTO room values("10204","Queen",10,"Super TV",1400,"sea view","no",null,10);
+INSERT INTO room values("10305","Super",14,"Party",600,"sea view","no",null,10);
+INSERT INTO room values("10103","Single",1,null,200,null,"yes","toilet",10);
+INSERT INTO room values("10106","Tour",2,"fridge",300,"mountain view","yes","washroom",10);
+
+INSERT INTO room values("100203","King",8,"Super TV",1200,"sea view","no",null,101);
+INSERT INTO room values("100204","Queen",10,"Super TV",1400,"sea view","no",null,101);
+INSERT INTO room values("100305","Super",14,"Party",1900,"sea view","no",null,101);
+INSERT INTO room values("100103","Single",1,null,200,null,"yes","toilet",101);
+INSERT INTO room values("100106","Tour",2,"fridge",300,"mountain view","yes","washroom",101);
+
+INSERT INTO room values("200203","King",8,"Super TV",1300,"sea view","no",null,102);
+INSERT INTO room values("200204","Queen",10,"Super TV",1400,"sea view","no",null,102);
+INSERT INTO room values("200305","Super",14,"Party",500,"sea view","no",null,102);
+INSERT INTO room values("200103","Single",1,null,200,null,"yes","toilet",102);
+INSERT INTO room values("200106","Tour",2,"fridge",300,"mountain view","yes","washroom",102);
+
+INSERT INTO room values("300203","King",8,"Super TV",1200,"sea view","no",null,103);
+INSERT INTO room values("300204","Queen",10,"Super TV",1400,"sea view","no",null,103);
+INSERT INTO room values("300305","Super",14,"Party",1900,"sea view","no",null,103);
+INSERT INTO room values("300103","Single",1,null,200,null,"yes","toilet",103);
+INSERT INTO room values("300106","Tour",2,"fridge",300,"mountain view","yes","washroom",103);
+
+INSERT INTO room values("400203","King",8,"Super TV",1200,"sea view","no",null,104);
+INSERT INTO room values("400204","Queen",10,"Super TV",1400,"sea view","no",null,104);
+INSERT INTO room values("400305","Super",14,"Party",1900,"sea view","no",null,104);
+INSERT INTO room values("400103","Single",1,null,200,null,"yes","toilet",104);
+INSERT INTO room values("400106","Tour",2,"fridge",300,"mountain view","yes","washroom",104);
+
+INSERT INTO room values("500203","King",8,"Super TV",1200,"sea view","no",null,105);
+INSERT INTO room values("500204","Queen",10,"Super TV",1400,"sea view","no",null,105);
+INSERT INTO room values("500305","Super",14,"Party",900,"sea view","no",null,105);
+INSERT INTO room values("500103","Single",1,null,200,null,"yes","toilet",105);
+INSERT INTO room values("500106","Tour",2,"fridge",300,"mountain view","yes","washroom",105);
+
+INSERT INTO room values("600203","King",8,"Super TV",1200,"sea view","no",null,106);
+INSERT INTO room values("600204","Queen",10,"Super TV",1400,"sea view","no",null,106);
+INSERT INTO room values("600305","Super",14,"Party",1900,"sea view","no",null,106);
+INSERT INTO room values("600103","Single",1,null,200,null,"yes","toilet",106);
+INSERT INTO room values("600106","Tour",2,"fridge",300,"mountain view","yes","washroom",106);
+
+INSERT INTO room values("700203","King",8,"Super TV",1200,"sea view","no",null,107);
+INSERT INTO room values("700204","Queen",10,"Super TV",1400,"sea view","no",null,107);
+INSERT INTO room values("700305","Super",14,"Party",1900,"sea view","no",null,107);
+INSERT INTO room values("700103","Single",1,null,200,null,"yes","toilet",107);
+INSERT INTO room values("700106","Tour",2,"fridge",300,"mountain view","yes","washroom",107);
+
+INSERT INTO room values("800203","King",8,"Super TV",1200,"sea view","no",null,108);
+INSERT INTO room values("800204","Queen",10,"Super TV",1400,"sea view","no",null,108);
+INSERT INTO room values("800305","Super",14,"Party",750,"sea view","no",null,108);
+INSERT INTO room values("800103","Single",1,null,200,null,"yes","toilet",108);
+INSERT INTO room values("800106","Tour",2,"fridge",300,"mountain view","yes","washroom",108);
+
+INSERT INTO room values("900203","King",8,"Super TV",1200,"sea view","no",null,109);
+INSERT INTO room values("900204","Queen",10,"Super TV",1400,"sea view","no",null,109);
+INSERT INTO room values("900305","Super",14,"Party",1900,"sea view","no",null,109);
+INSERT INTO room values("900103","Single",1,null,200,null,"yes","toilet",109);
+INSERT INTO room values("900106","Tour",2,"fridge",300,"mountain view","yes","washroom",109);
+
+INSERT INTO room values("110203","King",8,"Super TV",1200,"sea view","no",null,1101);
+INSERT INTO room values("110204","Queen",10,"Super TV",1400,"sea view","no",null,1101);
+INSERT INTO room values("110305","Super",14,"Party",1900,"sea view","no",null,1101);
+INSERT INTO room values("110103","Single",1,null,200,null,"yes","toilet",1101);
+INSERT INTO room values("110106","Tour",2,"fridge",300,"mountain view","yes","washroom",1101);
+
+INSERT INTO room values("120203","King",8,"Super TV",1200,"sea view","no",null,1102);
+INSERT INTO room values("120204","Queen",10,"Super TV",1400,"sea view","no",null,1102);
+INSERT INTO room values("120305","Super",14,"Party",560,"sea view","no",null,1102);
+INSERT INTO room values("120103","Single",1,null,200,null,"yes","toilet",1102);
+INSERT INTO room values("120106","Tour",2,"fridge",300,"mountain view","yes","washroom",1102);
+
+INSERT INTO room values("130203","King",8,"Super TV",1200,"sea view","no",null,1103);
+INSERT INTO room values("130204","Queen",10,"Super TV",1400,"sea view","no",null,1103);
+INSERT INTO room values("130305","Super",14,"Party",1900,"sea view","no",null,1103);
+INSERT INTO room values("130103","Single",1,null,200,null,"yes","toilet",1103);
+INSERT INTO room values("130106","Tour",2,"fridge",300,"mountain view","yes","washroom",1103);
+
+INSERT INTO room values("140203","King",8,"Super TV",1200,"sea view","no",null,1104);
+INSERT INTO room values("140204","Queen",10,"Super TV",1400,"sea view","no",null,1104);
+INSERT INTO room values("140305","Super",14,"Party",1900,"sea view","no",null,1104);
+INSERT INTO room values("140103","Single",1,null,200,null,"yes","toilet",1104);
+INSERT INTO room values("140106","Tour",2,"fridge",300,"mountain view","yes","washroom",1104);
+
+INSERT INTO room values("150203","King",8,"Super TV",1200,"sea view","no",null,1105);
+INSERT INTO room values("150204","Queen",10,"Super TV",778,"sea view","no",null,1105);
+INSERT INTO room values("150305","Super",14,"Party",1900,"sea view","no",null,1105);
+INSERT INTO room values("150103","Single",1,null,200,null,"yes","toilet",1105);
+INSERT INTO room values("150106","Tour",2,"fridge",300,"mountain view","yes","washroom",1105);
+
+INSERT INTO room values("160203","King",8,"Super TV",1200,"sea view","no",null,1106);
+INSERT INTO room values("160204","Queen",10,"Super TV",1400,"sea view","no",null,1106);
+INSERT INTO room values("160305","Super",14,"Party",1900,"sea view","no",null,1106);
+INSERT INTO room values("160103","Single",1,null,200,null,"yes","toilet",1106);
+INSERT INTO room values("160106","Tour",2,"fridge",300,"mountain view","yes","washroom",1106);
+
+INSERT INTO room values("170203","King",8,"Super TV",1200,"sea view","no",null,1107);
+INSERT INTO room values("170204","Queen",10,"Super TV",1400,"sea view","no",null,1107);
+INSERT INTO room values("170305","Super",14,"Party",1900,"sea view","no",null,1107);
+INSERT INTO room values("170103","Single",1,null,200,null,"yes","toilet",1107);
+INSERT INTO room values("170106","Tour",2,"fridge",300,"mountain view","yes","washroom",1107);
+
+INSERT INTO room values("180203","King",8,"Super TV",1200,"sea view","no",null,1108);
+INSERT INTO room values("180204","Queen",10,"Super TV",1400,"sea view","no",null,1108);
+INSERT INTO room values("180305","Super",14,"Party",1515,"sea view","no",null,1108);
+INSERT INTO room values("180103","Single",1,null,200,null,"yes","toilet",1108);
+INSERT INTO room values("180106","Tour",2,"fridge",300,"mountain view","yes","washroom",1108);
+
+INSERT INTO room values("35203","King",8,"Super TV",1200,"sea view","no",null,3540);
+INSERT INTO room values("35204","Queen",10,"Super TV",1400,"sea view","no",null,3540);
+INSERT INTO room values("35305","Super",14,"Party",1900,"sea view","no",null,3540);
+INSERT INTO room values("35103","Single",1,null,200,null,"yes","toilet",3540);
+INSERT INTO room values("35106","Tour",2,"fridge",300,"mountain view","yes","washroom",3540);
+
+INSERT INTO room values("36203","King",8,"Super TV",1200,"sea view","no",null,3541);
+INSERT INTO room values("36204","Queen",10,"Super TV",1400,"sea view","no",null,3541);
+INSERT INTO room values("36305","Super",14,"Party",1900,"sea view","no",null,3541);
+INSERT INTO room values("36103","Single",1,null,200,null,"yes","toilet",3541);
+INSERT INTO room values("36106","Tour",2,"fridge",300,"mountain view","yes","washroom",3541);
+
+INSERT INTO room values("37203","King",8,"Super TV",1200,"sea view","no",null,3542);
+INSERT INTO room values("37204","Queen",10,"Super TV",1400,"sea view","no",null,3542);
+INSERT INTO room values("37305","Super",14,"Party",233,"sea view","no",null,3542);
+INSERT INTO room values("37103","Single",1,null,200,null,"yes","toilet",3542);
+INSERT INTO room values("37106","Tour",2,"fridge",300,"mountain view","yes","washroom",3542);
+
+INSERT INTO room values("38203","King",8,"Super TV",1200,"sea view","no",null,3543);
+INSERT INTO room values("38204","Queen",10,"Super TV",1400,"sea view","no",null,3543);
+INSERT INTO room values("38305","Super",14,"Party",1900,"sea view","no",null,3543);
+INSERT INTO room values("38103","Single",1,null,200,null,"yes","toilet",3543);
+INSERT INTO room values("38106","Tour",2,"fridge",300,"mountain view","yes","washroom",3543);
+
+INSERT INTO room values("39203","King",8,"Super TV",1200,"sea view","no",null,3544);
+INSERT INTO room values("39204","Queen",10,"Super TV",1400,"sea view","no",null,3544);
+INSERT INTO room values("39305","Super",14,"Party",666,"sea view","no",null,3544);
+INSERT INTO room values("39103","Single",1,null,200,null,"yes","toilet",3544);
+INSERT INTO room values("39106","Tour",2,"fridge",300,"mountain view","yes","washroom",3544);
+
+INSERT INTO room values("40203","King",8,"Super TV",1200,"sea view","no",null,3545);
+INSERT INTO room values("40204","Queen",10,"Super TV",1400,"sea view","no",null,3545);
+INSERT INTO room values("40305","Super",14,"Party",1900,"sea view","no",null,3545);
+INSERT INTO room values("40103","Single",1,null,200,null,"yes","toilet",3545);
+INSERT INTO room values("40106","Tour",2,"fridge",300,"mountain view","yes","washroom",3545);
+
+INSERT INTO room values("41203","King",8,"Super TV",1200,"sea view","no",null,3546);
+INSERT INTO room values("41204","Queen",10,"Super TV",1400,"sea view","no",null,3546);
+INSERT INTO room values("41305","Super",14,"Party",1900,"sea view","no",null,3546);
+INSERT INTO room values("41103","Single",1,null,200,null,"yes","toilet",3546);
+INSERT INTO room values("41106","Tour",2,"fridge",300,"mountain view","yes","washroom",3546);
+
+INSERT INTO room values("42203","King",8,"Super TV",1200,"sea view","no",null,3547);
+INSERT INTO room values("42204","Queen",10,"Super TV",1400,"sea view","no",null,3547);
+INSERT INTO room values("42305","Super",14,"Party",1900,"sea view","no",null,3547);
+INSERT INTO room values("42103","Single",1,null,200,null,"yes","toilet",3547);
+INSERT INTO room values("42106","Tour",2,"fridge",300,"mountain view","yes","washroom",3547);
+
+INSERT INTO room values("43203","King",8,"Super TV",1200,"sea view","no",null,3548);
+INSERT INTO room values("43204","Queen",10,"Super TV",1400,"sea view","no",null,3548);
+INSERT INTO room values("43305","Super",14,"Party",1900,"sea view","no",null,3548);
+INSERT INTO room values("43103","Single",1,null,200,null,"yes","toilet",3548);
+INSERT INTO room values("43106","Tour",2,"fridge",300,"mountain view","yes","washroom",3548);
+
+INSERT INTO room values("44203","King",8,"Super TV",1200,"sea view","no",null,3549);
+INSERT INTO room values("44204","Queen",10,"Super TV",1400,"sea view","no",null,3549);
+INSERT INTO room values("44305","Super",14,"Party",1900,"sea view","no",null,3549);
+INSERT INTO room values("44103","Single",1,null,200,null,"yes","toilet",3549);
+INSERT INTO room values("44106","Tour",2,"fridge",300,"mountain view","yes","washroom",3549);
+
+INSERT INTO room values("405203","King",8,"Super TV",1200,"sea view","no",null,4056);
+INSERT INTO room values("405204","Queen",10,"Super TV",1400,"sea view","no",null,4056);
+INSERT INTO room values("405305","Super",14,"Party",1900,"sea view","no",null,4056);
+INSERT INTO room values("405103","Single",1,null,200,null,"yes","toilet",4056);
+INSERT INTO room values("405106","Tour",2,"fridge",300,"mountain view","yes","washroom",4056);
+
+INSERT INTO room values("406203","King",8,"Super TV",1200,"sea view","no",null,4057);
+INSERT INTO room values("406204","Queen",10,"Super TV",1400,"sea view","no",null,4057);
+INSERT INTO room values("406305","Super",14,"Party",1900,"sea view","no",null,4057);
+INSERT INTO room values("406103","Single",1,null,200,null,"yes","toilet",4057);
+INSERT INTO room values("406106","Tour",2,"fridge",300,"mountain view","yes","washroom",4057);
+
+INSERT INTO room values("407203","King",8,"Super TV",1200,"sea view","no",null,4058);
+INSERT INTO room values("407204","Queen",10,"Super TV",1400,"sea view","no",null,4058);
+INSERT INTO room values("407305","Super",14,"Party",1900,"sea view","no",null,4058);
+INSERT INTO room values("407103","Single",1,null,200,null,"yes","toilet",4058);
+INSERT INTO room values("407106","Tour",2,"fridge",300,"mountain view","yes","washroom",4058);
+
+INSERT INTO room values("408203","King",8,"Super TV",1200,"sea view","no",null,4059);
+INSERT INTO room values("408204","Queen",10,"Super TV",1400,"sea view","no",null,4059);
+INSERT INTO room values("408305","Super",14,"Party",1900,"sea view","no",null,4059);
+INSERT INTO room values("408103","Single",1,null,200,null,"yes","toilet",4059);
+INSERT INTO room values("408106","Tour",2,"fridge",300,"mountain view","yes","washroom",4059);
+
+INSERT INTO room values("409203","King",8,"Super TV",1200,"sea view","no",null,4060);
+INSERT INTO room values("409204","Queen",10,"Super TV",1400,"sea view","no",null,4060);
+INSERT INTO room values("409305","Super",14,"Party",1900,"sea view","no",null,4060);
+INSERT INTO room values("409103","Single",1,null,200,null,"yes","toilet",4060);
+INSERT INTO room values("409106","Tour",2,"fridge",300,"mountain view","yes","washroom",4060);
+
+INSERT INTO room values("410203","King",8,"Super TV",1200,"sea view","no",null,4061);
+INSERT INTO room values("410204","Queen",10,"Super TV",1400,"sea view","no",null,4061);
+INSERT INTO room values("410305","Super",14,"Party",1900,"sea view","no",null,4061);
+INSERT INTO room values("410103","Single",1,null,200,null,"yes","toilet",4061);
+INSERT INTO room values("410106","Tour",2,"fridge",300,"mountain view","yes","washroom",4061);
+
+INSERT INTO room values("411203","King",8,"Super TV",1200,"sea view","no",null,4062);
+INSERT INTO room values("411204","Queen",10,"Super TV",1400,"sea view","no",null,4062);
+INSERT INTO room values("411305","Super",14,"Party",1900,"sea view","no",null,4062);
+INSERT INTO room values("411103","Single",1,null,200,null,"yes","toilet",4062);
+INSERT INTO room values("411106","Tour",2,"fridge",300,"mountain view","yes","washroom",4062);
+
+INSERT INTO room values("412203","King",8,"Super TV",1200,"sea view","no",null,4063);
+INSERT INTO room values("412204","Queen",10,"Super TV",1400,"sea view","no",null,4063);
+INSERT INTO room values("412305","Super",14,"Party",1900,"sea view","no",null,4063);
+INSERT INTO room values("412103","Single",1,null,200,null,"yes","toilet",4063);
+INSERT INTO room values("412106","Tour",2,"fridge",300,"mountain view","yes","washroom",4063);

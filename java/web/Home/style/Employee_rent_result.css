@@ -1,0 +1,46 @@
+html {
+    min-height: 100%;
+    background-image: linear-gradient(to bottom right, #12c2e9, #c471ed, #f64f59);
+}
+
+h1 {
+    text-align: center;
+}
+
+.search-result {
+    max-width: 75%;
+    margin: auto;
+    background-color: white;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.hotel_image {
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 0px;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    width: 10%;
+    height: 10%;
+}
+
+p.align-left {
+    margin-left: 10%;
+    text-align: left;
+    margin-right: 10%;
+}
+
+span.align-right {
+    float:right;
+}
+
+button.btnRent {
+    float:right;
+}
+
+#rent_room {
+    visibility: hidden;
+}

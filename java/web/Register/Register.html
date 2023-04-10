@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - E-Hotel</title>
+    <link rel="stylesheet" href="Register.css">
+</head>
+<body>
+    <h1>Register</h1>
+    <form id="register_input_form" action="../register" method="post" onsubmit="return validate()">
+        <p>1. Select a role:</p>
+        <input type="radio" name="user_role" id="role_customer" value="Customer">
+        <label for="role_customer">Customer</label>
+        <input type="radio" name="user_role" id="role_employee" value="Employee">
+        <label for="role_employee">Employee</label>
+        <p>2. Enter first+last name, separated by space: <input type="text" name="user_name" id="name"></p>
+        <p>3. Select a gender:</p>
+        <input type="radio" name="user_gender" id="sex_male" value="Male">
+        <label for="sex_male">Male</label>
+        <input type="radio" name="user_gender" id="sex_female" value="Female">
+        <label for="sex_female">Female</label>
+        <input type="radio" name="user_gender" id="sex_other" value="Other">
+        <label for="sex_other">Other</label>
+        <p>4. Enter email address, will be used for future login: <input type="email" name="user_email" id="email"></p>
+        <p>5. Enter mobile phone number: <input type="tel" name="user_phone" id="tel"></p>
+        <p>6. Enter Social Security number(SSN): <input type="text" name="user_ssn" id="ssn"></p>
+        <p>7. Enter address: </p>
+        <textarea name="user_address" rows="4" cols="50" id="address">Please enter address here...</textarea>
+        <p>8. Enter password: <input type="password" name="user_pw" id="pw1"></p>
+        <p>9. Enter password Again: <input type="password" name="user_pw" id="pw2"></p>
+        <p>*Note: For security reason, password should be around 8-14 alphanumeric characters, 
+            ideally contains special characters (@#$%^&*)</p><br>
+        <button type="submit" id="btn_submit">Submit</button><button type="reset" id="btn_reset">Reset</button>
+    </form>
+
+    <script src="Register.js"></script>
+</body>
+</html>

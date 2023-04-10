@@ -1,0 +1,2 @@
+CREATE VIEW view1 AS SELECT DISTINCT area, count(R.room_ID) FROM Hotel, Room AS R WHERE (area = (SELECT area FROM Hotel WHERE Hotel_id = R.hotel_ID)) GROUP BY area;
+CREATE VIEW view2 AS SELECT hotel_name, H.hotel_id, sum(R.capacity) FROM hotel AS H, room AS R WHERE R.hotel_ID = H.hotel_id GROUP BY hotel_name, H.hotel_id;

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Hotel Management System</title>
+    <link rel="stylesheet" href="../Home/style/Admin.css">
+</head>
+<body>
+    <h1 style="text-align:center">Create/Edit Room</h1>
+
+    <form class="selection-field" id="form" action="../adminMod" method="post">
+        <p>If room id exist in database, then by submitting this form will update existing room. If not then it will create a new one (If all the blanks are filled)</p>
+        <label for="room_id">Room id:</label>
+        <input type="text" name="roomID" id="room_id"><br><br>
+        <label for="hotel_id">Hotel id(Must exists in database):</label>
+        <input type="number" name="hotelID" id="hotel_id"><br><br>
+        <label for="type">Room type:</label>
+        <input type="text" name="type" id="type"><br><br>
+        <label for="capacity">Capacity:</label>
+        <input type="number" name="capacity" id="capacity"><br><br>
+        <label for="price">Price(per night):</label>
+        <input type="number" name="price" id="price"><br><br>
+        <label for="view">View type:</label>
+        <input type="text" name="view" id="view"><br><br>
+        <label for="flagExtension">Can be extended?:</label>
+        <select id="flagExtension" name="extend">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="Not Fixed">Not fixed</option>
+        </select><br><br>
+        <p>List of available amenities:<p>
+        <textarea name="amenities" rows="4" cols="50" id="amenities">Please enter amenities here...</textarea><br><br>
+        <p>List of problems:<p>
+        <textarea name="problems" rows="4" cols="50" id="problems">Please enter problems here...</textarea>
+        <input type="hidden" name="req_type" value="updateRoom"><br><br>
+        <div class="btn"><button type="submit" class="button">Submit</button></div>
+    </form>
+</body>
+</html>

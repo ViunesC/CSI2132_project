@@ -1,0 +1,46 @@
+html {
+    min-height: 100%;
+    background-image: linear-gradient(to bottom right, #12c2e9, #c471ed, #f64f59);
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+#search_for_room {
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    margin: auto;
+    width: 39.2%;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 3px;
+}
+
+#btn_submit {
+    margin-left:40%;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+button.button {
+    font-size: 25px;
+}
+
+button.margin-right {
+    margin-right: 20px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Hotel Management System</title>
+    <link rel="stylesheet" href="../Home/style/Admin.css">
+</head>
+<body>
+    <h1 style="text-align:center">Create/Edit Hotel</h1>
+
+    <form class="selection-field" id="form" action="../adminMod" method="post">
+        <p>If hotel id exist in database, then by submitting this form will update existing hotel. If not then it will create a new one (If all the blanks are filled)</p>
+        <label for="chain_id">Chain id(Must exists in database):</label>
+        <input type="number" name="chainID" id="chain_id"><br><br>
+        <label for="hotel_id">Hotel id:</label>
+        <input type="number" name="hotelID" id="hotel_id"><br><br>
+        <label for="hotel_name">Hotel name:</label>
+        <input type="text" name="hotelName" id="hotel_name"><br><br>
+        <label for="hotel_email">Email:</label>
+        <input type="email" name="hotelEmail" id="hotel_email"><br><br>
+        <label for="hotel_address">Address:</label>
+        <input type="text" name="hotelAddr" id="hotel_address"><br><br>
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category"><br><br>
+        <label for="area">Area:</label>
+        <input type="text" name="area" id="area"><br><br>
+        <input type="hidden" name="req_type" value="updateHotel"><br><br>
+        <div class="btn"><button type="submit" class="button">Submit</button></div>
+    </form>
+</body>
+</html>

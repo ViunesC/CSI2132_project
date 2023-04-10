@@ -1,0 +1,63 @@
+html {
+    min-height: 100%;
+    background-image: linear-gradient(to bottom right, #12c2e9, #c471ed, #f64f59);
+}
+
+h1 {
+    text-align: center;
+}
+
+#Login_form {
+    margin:auto;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    width: 39.2%;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    background-color: white;
+}
+
+input {
+    width: auto;
+    border-style: solid;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    background-color: transparent;
+}
+
+#login_input {
+    margin-top: 5%;
+    margin-left: 25%;
+    font-size: 15px;
+    text-align: left;
+}
+
+.btn {
+    padding: 3%;
+    width: 30%;
+    height: 30%;
+    text-align: center;
+    margin-top: 10px;
+    border-style: solid;
+    border-radius: 10px;
+    border-width: 0px;
+    background-color: transparent;
+    box-shadow: 5px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom right, #12c2e9, #c471ed, #f64f59);
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+button.margin-right {
+    margin-right: 20px;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>e-Hotel Login</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <form id="Login_form" action="login" method="post" onsubmit="return validate()">
+        <h1>Login</h1>
+        <div id="login_input">
+            <label for="input_email">Email address:</label><br>
+            <input type="email" name="user_email" id="input_email"><br><br><br><br>
+            <label for="input_pw">Password:</label><br>
+            <input type="password" name="user_pw" id="input_pw"><br><br><br>
+            <input type="radio" name="user_role" id="role_customer" value="Customer">
+            <label for="role_customer">Customer</label>
+            <input type="radio" name="user_role" id="role_employee" value="Employee">
+            <label for="role_employee">Employee</label>
+            <input type="radio" name="user_role" id="role_admin" value="Admin">
+            <label for="role_admin">Admin</label><br><br><br>
+        </div>
+        <div id="buttons">
+            <button type="submit" id="btn_login" class="btn margin-right">Login</button>
+            <button type="button" class="btn" onclick="window.location.replace('Register/Register.html')">Register</button>
+        </div>
+    </form>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Hotel Management System</title>
+    <link rel="stylesheet" href="../Home/style/Admin.css">
+</head>
+<body>
+    <h1 style="text-align:center">Create/Edit Hotel Chain</h1>
+
+    <form class="selection-field" id="form" action="../adminMod" method="post">
+        <p>If id exist in database, then by submitting this form will update existing chain. If not then it will create a new chain (If all the blanks are filled)</p>
+        <label for="chain_id">Chain id:</label>
+        <input type="number" name="chainID" id="chain_id"><br><br>
+        <label for="chain_name">Chain name:</label>
+        <input type="text" name="chainName" id="chain_name"><br><br>
+        <label for="chain_email">Email:</label>
+        <input type="email" name="chainEmail" id="chain_email"><br><br>
+        <label for="chain_address">Office Address:</label>
+        <input type="text" name="chainAddr" id="chain_address"><br><br>
+        <label for="chain_phone">Telephone number:</label>
+        <input type="tel" name="chainPhone" id="chain_phone"><br><br>
+        <label for="numberHotels">Number of hotels:</label>
+        <input type="number" name="numberHotels" id="numberHotels"><br><br>
+        <input type="hidden" name="req_type" value="updateChain"><br><br>
+        <div class="btn"><button type="submit" class="button">Submit</button></div>
+    </form>
+</body>
+</html>
